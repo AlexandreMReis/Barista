@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+			<meta name="description" content="A Bootstrap based app landing page template">
+			<meta name="author" content="">
+			<link rel="shortcut icon" href="assets/ico/favicon.ico">
+
+			<title>AppBay - Responsive App Landing Page Template</title>
+
+			<!-- Bootstrap core CSS -->
+			<link href="css/bootstrap.min.css" rel="stylesheet">
+
+			<!-- Custom styles for this template -->
+			<link href="css/custom.css" rel="stylesheet">
+			<link href="css/flexslider.css" rel="stylesheet">
+			
+			<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+			<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700' rel='stylesheet' type='text/css'>
+			<link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
+
+			<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+			<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+			<![endif]-->
+		</head>
+
+		<body>
+			<div class="navbar navbar-inverse" role="navigation">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand">
+							Barista - Bebidas
+						</a>
+					</div>
+					<div class="collapse navbar-collapse appiNav">
+						<ul class="nav navbar-nav">
+							<li><a href="#testimonialsWrap">Chamar Empregado</a></li>
+							<li><a href="MainMenu.html">Voltar</a></li>
+							<li><a href="StartSession.html">Sair</a></li>
+						</ul>
+					</div><!--/.nav-collapse -->
+				</div>
+			</div>
+	<div id="pricingWrap">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-5">
+					<table class="priceTable" style="width: 100%;">
+						<tr>
+							<th>Qtd</th>
+							<th>Nome</th>
+							<th>Preço</th>
+						</tr>
+						<tr>
+							<td><input id="InputBeerAmmount" type="number" min="0"  step="1" value="0"/></td>
+							<td>Cerveja</td>
+							<td>1€</td>
+						</tr>
+						<tr>
+							<td><input id="InputTeaAmmount" type="number" min="0" step="1" value="0"/></td>
+							<td>Chá</td>
+							<td>0,50€</td>
+						</tr>
+						<tr>
+							<td><input id="InputWaterAmmount" type="number" min="0" step="1" value="0"/></td>
+							<td>Água s/gás</td>
+							<td>0,70€</td>
+						</tr>
+					</table>
+				</div>
+				<div class="col-sm-2">
+					<ul class="priceTable">
+						<li class="call">
+							<a id="AddDrinksButton" class="btn btn-success btn-lg" href="#">>></a>
+						</li>
+						<li class="call">
+							<a class="btn btn-success btn-lg" href="#"><<</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-sm-5">
+					<table id="ItemsToOrderTable" class="priceTable" style="width: 100%;">
+						<tr>
+							<th>Qtd</th>
+							<th>Nome</th>
+							<th>Preço</th>
+						</tr>
+					</table>
+					<p style="text-align: center;">Total: <span style="color:black"><b id="TotalPrice">0€</b></span></p>
+					<a id="OrderItemsButton" class="btn btn-success btn-lg" href="#">Pedir</a>
+				</div>
+			</div>
+		</div>
+	</div> <!-- /pricingWrap -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/flexslider.js"></script>
+	
+<script type="text/javascript">
+$(document).ready(function() {
+
+});
+</script>
+<script type="text/javascript">
+    document.getElementById("AddDrinksButton").onclick = function () {
+		var itemsToOrderTable = document.getElementById("ItemsToOrderTable");
+		var header = itemsToOrderTable.rows[0].innerHTML;
+		itemsToOrderTable.innerHTML = header;
+		var beerAmmount = document.getElementById("InputBeerAmmount").value;
+		if(beerAmmount > 0){
+			console.log("Beer ammount is higher then 0");
+			var row = itemsToOrderTable.insertRow(itemsToOrderTable.length);
+			var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = beerAmmount;
+			cell2.innerHTML = "Cerveja";
+			cell3.innerHTML = beerAmmount + "€";
+		}
+		var teaAmmount = document.getElementById("InputTeaAmmount").value;
+		if(teaAmmount > 0){
+			console.log("Tea ammount is higher then 0");
+			var row = itemsToOrderTable.insertRow(itemsToOrderTable.length);
+			var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = teaAmmount;
+			cell2.innerHTML = "Chá";
+			var price = teaAmmount * 0.5;
+			cell3.innerHTML = price.toFixed(2) + "€";
+		}
+		var waterAmmount = document.getElementById("InputWaterAmmount").value;
+		if(waterAmmount > 0){
+			console.log("Tea ammount is higher then 0");
+			var row = itemsToOrderTable.insertRow(itemsToOrderTable.length);
+			var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			cell1.innerHTML = waterAmmount;
+			cell2.innerHTML = "Água s/gás";
+			var price = waterAmmount * 0.70;
+			cell3.innerHTML = price.toFixed(2) + "€";
+		}
+		if(beerAmmount > 0 || teaAmmount > 0 || waterAmmount > 0)
+		{
+			var totalPriceElement = document.getElementById("TotalPrice");
+			console.log(totalPriceElement);
+			var price = Number(beerAmmount) + Number(teaAmmount*0.5) + Number(waterAmmount*0.7);
+			document.getElementById("TotalPrice").innerHTML = price.toFixed(2) + "€";
+		}
+		localStorage.setItem("OrderedItems", "YES")
+
+    };
+</script>
+<script type="text/javascript">
+    document.getElementById("RemoveDrinksButton").onclick = function () {
+        location.href = "MainMenu.html";
+    };
+</script>
+<script type="text/javascript">
+    document.getElementById("OrderItemsButton").onclick = function () {
+		alert("Pedido efetuado com sucesso.")
+        location.href = "MainMenu.html";
+    };
+</script>
+  </body>
+</html>

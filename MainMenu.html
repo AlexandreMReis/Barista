@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+			<meta name="description" content="A Bootstrap based app landing page template">
+			<meta name="author" content="">
+			<link rel="shortcut icon" href="assets/ico/favicon.ico">
+
+			<title>AppBay - Responsive App Landing Page Template</title>
+
+			<!-- Bootstrap core CSS -->
+			<link href="css/bootstrap.min.css" rel="stylesheet">
+
+			<!-- Custom styles for this template -->
+			<link href="css/custom.css" rel="stylesheet">
+			<link href="css/flexslider.css" rel="stylesheet">
+			
+			<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+			<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700' rel='stylesheet' type='text/css'>
+			<link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
+			<!-- <script src="https://kit.fontawesome.com/a076d05399.js"></script> -->
+			<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+			<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+			<![endif]-->
+		</head>
+
+		<body>
+			<div class="navbar navbar-inverse" role="navigation">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand">
+							Barista
+						</a>
+					</div>
+					<div class="collapse navbar-collapse appiNav">
+						<ul class="nav navbar-nav">
+							<li><a id="CallEmployeeButton" href="#testimonialsWrap">Chamar Empregado</a></li>
+							<li><a id="ExitButton">Sair</a></li>
+						</ul>
+					</div><!--/.nav-collapse -->
+				</div>
+			</div>
+	<div id="featureWrap">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 text-center feature">
+					<i id="DrinksMenuButton" class="fa fa-coffee icon"></i>
+					<h3>Bebidas</h3>
+
+				</div>
+				<div class="col-sm-6 text-center feature">
+					<i id="SnacksMenuButton" class="fa fa-cutlery icon"></i>
+					<h3>Snacks</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 text-center feature">
+					<i id="GamesMenuButton" class="fa fa-gamepad icon"></i>
+					<h3>Jogar</h3>
+				</div>
+				<div id="PayButton" class="col-sm-6 text-center feature" style="visibility: hidden;">
+					<i class="fa fa-money icon"></i>
+					<h3>Efetuar Pagamento</h3>
+				</div>
+			</div>
+		</div>
+	</div> <!-- /featureWrap -->
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/flexslider.js"></script>
+	
+<script type="text/javascript">
+$(document).ready(function() {
+
+	$('.mobileSlider').flexslider({
+		animation: "slide",
+		slideshowSpeed: 3000,
+		controlNav: false,
+		directionNav: true,
+		prevText: "&#171;",
+		nextText: "&#187;"
+	});
+	$('.flexslider').flexslider({
+		animation: "slide",
+		directionNav: false
+	});
+		
+	$('a[href*=#]:not([href=#])').click(function() {
+		if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') || location.hostname == this.hostname) {
+			var target = $(this.hash);
+			target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+			if ($(window).width() < 768) {
+				if (target.length) {
+					$('html,body').animate({
+						scrollTop: target.offset().top - $('.navbar-header').outerHeight(true) + 1
+					}, 1000);
+					return false;
+				}
+			}
+			else {
+				if (target.length) {
+					$('html,body').animate({
+						scrollTop: target.offset().top - $('.navbar').outerHeight(true) + 1
+					}, 1000);
+					return false;
+				}
+			}
+
+		}
+	});
+	
+	$('#toTop').click(function() {
+		$('html,body').animate({
+			scrollTop: 0
+		}, 1000);
+	});
+	
+	var timer;
+    $(window).bind('scroll',function () {
+        clearTimeout(timer);
+        timer = setTimeout( refresh , 50 );
+    });
+    var refresh = function () {
+		if ($(window).scrollTop()>100) {
+			$(".tagline").fadeTo( "slow", 0 );
+		}
+		else {
+			$(".tagline").fadeTo( "slow", 1 );
+		}
+	};
+	
+	var payButtonElement = document.getElementById("PayButton");
+	
+	var orderedItems= localStorage.getItem("OrderedItems");
+	if(orderedItems == null || orderedItems.length == 0)
+	{
+		payButtonElement.style.visibility = "hidden";
+	}
+	else
+	{
+		payButtonElement.style.visibility = "visible";
+	}
+});
+	function DoPayment(){
+		if(confirm("Pretende dividir a conta?")){
+			var response = prompt("Por quantas pessoas?", "1");
+		};
+		alert("Siga(m) as instruções no terminal multibanco, quando terminar(em) pressione(m) 'OK'.");
+		alert("Pagamento efetuado com sucesso.");
+		if(confirm("Pretende fatura?")){
+			var response = prompt("Insira o seu NIF.");
+		};
+		alert("Obrigado pela sua visita e volte brevemente.");
+
+		localStorage.removeItem("OrderedItems")
+		location.href = "StartSession.html";
+	}
+
+    document.getElementById("DrinksMenuButton").onclick = function () {
+        location.href = "DrinksMenu.html";
+    };
+    document.getElementById("SnacksMenuButton").onclick = function () {
+        location.href = "SnacksMenu.html";
+    };
+    document.getElementById("GamesMenuButton").onclick = function () {
+        location.href = "GamesMenu.html";
+    };
+    document.getElementById("PayButton").onclick = function () {
+		DoPayment();
+    };
+    document.getElementById("CallEmployeeButton").onclick = function () {
+        alert("Empregado está a caminho.");
+    };
+    document.getElementById("ExitButton").onclick = function () {
+
+	var orderedItems= localStorage.getItem("OrderedItems");
+	if(orderedItems != null)
+	{
+		var response = prompt("Aviso!\nPara sair tem de efetuar o pagamento. Insira uma das seguintes opções\na) Chamar empregado \nb) Pagar por multibanco\nc) Continuar a navegar");
+		if(response=="a")
+		{
+			alert("Empregado vem a caminho");
+		}
+		else if(response=="b")
+		{
+			DoPayment();
+		}
+	}
+	else
+	{
+		location.href = "StartSession.html";
+	}
+    };
+</script>
+  </body>
+</html>
